@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Formatter</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="title">LinkedIn Text Formatter</h1>
+    <p class="subtitle">Start transforming your writing today - explore effortless formatting for every piece you
+      create!</p>
+    <div class="toolbar">
+      <button class="btn" id="btn-bold" title="Bold">B</button>
+      <button class="btn" id="btn-italic" title="Italic">I</button>
+      <button class="btn" id="btn-bold-italic" title="Bold+Italic">B+I</button>
+      <button class="btn" id="btn-underline" title="Underline">U</button>
+      <button class="btn" id="btn-strikethrough" title="Strikethrough">S</button>
+      <div class="divider"></div>
+      <button class="btn" id="btn-add-emoji" title="Add emoji">😊</button>
+      <div class="divider"></div>
+      <button class="btn" id="btn-bullet-point" title="Bullet Point">⚫</button>
+      <div class="divider"></div>
+      <button class="btn" id="btn-clear" title="Clear">🧹</button>
+    </div>
+    <textarea id="editor" class="editor" placeholder="Write here..."></textarea>
+    <button class="action-btn" id="btn-copy">Copy text</button>
+  </div>
+
+  <div id="emoji-picker" class="emoji-picker"></div>
+  <script src="popup.js"></script>
+</body>
+
+</html>
