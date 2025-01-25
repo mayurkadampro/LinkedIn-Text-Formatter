@@ -10,27 +10,47 @@
 
 <body>
   <div class="container">
-    <h1 class="title">LinkedIn Text Formatter</h1>
-    <p class="subtitle">Start transforming your writing today - explore effortless formatting for every piece you
-      create!</p>
-    <div class="toolbar">
-      <button class="btn" id="btn-bold" title="Bold">B</button>
-      <button class="btn" id="btn-italic" title="Italic">I</button>
-      <button class="btn" id="btn-bold-italic" title="Bold+Italic">B+I</button>
-      <button class="btn" id="btn-underline" title="Underline">U</button>
-      <button class="btn" id="btn-strikethrough" title="Strikethrough">S</button>
-      <div class="divider"></div>
-      <button class="btn" id="btn-add-emoji" title="Add emoji">😊</button>
-      <div class="divider"></div>
-      <button class="btn" id="btn-bullet-point" title="Bullet Point">⚫</button>
-      <div class="divider"></div>
-      <button class="btn" id="btn-clear" title="Clear">🧹</button>
+    <div class="header">
+      <h1 class="title">
+        <img src="icons/linkedin-icon.png" alt="LinkedIn">
+        LinkedIn Text Formatter
+      </h1>
+
     </div>
-    <textarea id="editor" class="editor" placeholder="Write here..."></textarea>
-    <button class="action-btn" id="btn-copy">Copy text</button>
+    <div class="subtitle">
+      <p>Start transforming your writing today - explore effortless formatting for every piece you
+        create!</p>
+
+    </div>
+
+    <div class="toolbar">
+      <div class="btn-group">
+        <button class="btn" id="btn-bold" title="Bold">𝐁</button>
+        <button class="btn" id="btn-italic" title="Italic">𝐼</button>
+        <button class="btn" id="btn-bold-italic" title="Bold and Italic">𝐁 + 𝐼</button>
+        <button class="btn" id="btn-underline" title="Underline">U̲</button>
+      </div>
+      <div class="divider"></div>
+
+      <div class="btn-group">
+        <button class="btn" id="btn-bullet-point" title="Bullet Point">•</button>
+        <!-- <button class="btn" id="btn-ordered-list" title="Ordered List">①</button> -->
+      </div>
+      <div class="divider"></div>
+
+      <div class="btn-group">
+        <button class="btn" id="btn-add-emoji" title="Add Emoji">😊</button>
+        <button class="btn" id="btn-clear" title="Clear">🧹</button>
+      </div>
+    </div>
+
+    <textarea id="editor" class="editor" placeholder="Compose your LinkedIn post here..."></textarea>
+
+    <button class="action-btn" id="btn-copy">Copy Formatted Text</button>
   </div>
 
   <div id="emoji-picker" class="emoji-picker"></div>
+
   <script src="main.js"></script>
 </body>
 
