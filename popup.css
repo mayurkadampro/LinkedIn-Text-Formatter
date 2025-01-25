@@ -1,0 +1,182 @@
+:root {
+    --primary-color: #0a66c2;
+    --secondary-color: #004182;
+    --background-color: #f9f9f9;
+    --border-color: #e0e0e0;
+    --text-color: #333;
+    --hover-color: #f3f2ef;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.container {
+    width: 455px;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    overflow-y: hidden;
+}
+
+.title {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 32px;
+    font-size: 16px;
+}
+
+.editor {
+    width: 100%;
+    height: 250px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.toolbar {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.divider {
+    width: 1px;
+    background-color: var(--border-color);
+    margin: 0 4px;
+    align-self: stretch;
+}
+
+.btn {
+    background: transparent;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    color: var(--text-color);
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    background-color: var(--hover-color);
+    color: var(--primary-color);
+}
+
+.editor:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.1);
+}
+
+.preview {
+    padding: 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    margin-top: 20px;
+    min-height: 100px;
+    white-space: pre-wrap;
+    background: #fff;
+}
+
+.preview-title {
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-color);
+}
+
+.action-btn {
+    padding: 10px 20px;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    border: 1px solid var(--primary-color);
+    background: white;
+    color: var(--primary-color);
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    background-color: rgba(10, 102, 194, 0.1);
+    transform: translateY(-1px);
+}
+
+.emoji-picker {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    display: none;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 8px;
+    max-width: 500px;
+    max-height: 400px;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.emoji-btn {
+    padding: 8px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 20px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.emoji-btn:hover {
+    background: var(--hover-color);
+    transform: scale(1.1);
+}
+
+textarea {
+    resize: none;
+    font-size: 15pt !important;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .toolbar {
+        padding: 8px;
+    }
+
+    .btn {
+        padding: 6px 10px;
+    }
+}
