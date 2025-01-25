@@ -1,15 +1,16 @@
 {
   "manifest_version": 3,
-  "name": "Text Formatter",
+  "name": "LinkedIn Text Formatter",
   "version": "1.0",
-  "description": "A text formatter with bold, italic, underline, bullet points, and ordered lists.",
+  "description": "A LinkedIn Text Formatter with functionalities for bold, italic, underline, bullet points, and emojis.",
   "permissions": [],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
       "16": "icons/icon-16.png",
       "48": "icons/icon-48.png",
-      "128": "icons/icon-128.png"
+      "128": "icons/icon-128.png",
+      "1024": "icons/icon-1024.png"
     },
     "default_popup_size": {
       "width": 800,
