@@ -4,14 +4,15 @@ window.addEventListener("load", () => {
 
   // Function to save text to localStorage
   function saveToLocalStorage() {
-    localStorage.setItem("editorContent", editor.value);
+    const content = { value: editor.value };
+    localStorage.setItem("editorContent", JSON.stringify(content));
   }
 
   // Function to load saved text from localStorage
   function loadFromLocalStorage() {
     const savedText = localStorage.getItem("editorContent");
     if (savedText) {
-      editor.value = savedText;
+      editor.value = JSON.parse(savedText).value;
     }
   }
 
@@ -89,6 +90,7 @@ window.addEventListener("load", () => {
     editor.focus();
     editor.selectionStart = start;
     editor.selectionEnd = start + resultText.length;
+    saveToLocalStorage();
   }
 
   function applyFormatting(text, type) {
@@ -168,6 +170,7 @@ window.addEventListener("load", () => {
       editor.selectionStart = editor.selectionEnd = start + emoji.length;
 
       toggleEmojiPicker();
+      saveToLocalStorage();
     }
   }
 
@@ -208,6 +211,7 @@ window.addEventListener("load", () => {
     // Restore the selection range
     editor.selectionStart = start;
     editor.selectionEnd = start + updatedText.length;
+    saveToLocalStorage();
   }
 
   function insertOrderedList() {
