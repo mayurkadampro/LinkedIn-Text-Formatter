@@ -2,6 +2,19 @@ window.addEventListener("load", () => {
   const editor = document.getElementById("editor");
   const emojiPicker = document.getElementById("emoji-picker");
 
+  // Function to save text to localStorage
+  function saveToLocalStorage() {
+    localStorage.setItem("editorContent", editor.value);
+  }
+
+  // Function to load saved text from localStorage
+  function loadFromLocalStorage() {
+    const savedText = localStorage.getItem("editorContent");
+    if (savedText) {
+      editor.value = savedText;
+    }
+  }
+
   function toNormalText(text) {
     return text
       .replace(/[\uD835][\uDC00-\uDC9B]/g, (match) => {
@@ -330,6 +343,7 @@ window.addEventListener("load", () => {
 
   function clearEditor() {
     if (confirm("Are you sure you want to clear all content?")) {
+      localStorage.clear();
       editor.value = ""; // Clear the text editor
     }
   }
@@ -448,4 +462,10 @@ window.addEventListener("load", () => {
 
   // Initialize
   initEmojiPicker();
+
+  // Load the saved content when the extension starts
+  loadFromLocalStorage();
+
+  // Listen for text changes and save to localStorage
+  editor.addEventListener("input", saveToLocalStorage);
 });
