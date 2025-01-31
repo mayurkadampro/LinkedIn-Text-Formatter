@@ -180,7 +180,7 @@ textarea {
 
 .app-container {
   display: flex;
-  gap: 24px;
+  gap: 15px;
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px;
@@ -240,6 +240,10 @@ textarea {
 .profile-name {
   font-weight: 600;
   color: var(--text-primary);
+}
+
+.profile-redirect {
+  margin-left: 2px;
 }
 
 .post-time {

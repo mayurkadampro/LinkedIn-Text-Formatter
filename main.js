@@ -363,6 +363,7 @@ window.addEventListener("load", () => {
     "🕌",
     "🕍",
     "🌟",
+    "✅",
   ];
 
   function initEmojiPicker() {
@@ -504,8 +505,6 @@ window.addEventListener("load", () => {
       insertEmoji(event);
     } else if (event.target.matches("#btn-copy")) {
       copyText();
-    } else if(("profile-details"))  {
-      window.open('http://stackoverflow.com', '_blank');
     } else {
       // Close emoji picker when clicking outside
       if (
