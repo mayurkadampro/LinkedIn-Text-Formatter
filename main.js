@@ -1,8 +1,20 @@
+const samplePost = `🚀 𝐓𝐢𝐫𝐞𝐝 𝐨𝐟 𝐩𝐥𝐚𝐢𝐧 𝐋𝐢𝐧𝐤𝐞𝐝𝐈𝐧 𝐩𝐨𝐬𝐭𝐬? 𝐒𝐭𝐚𝐧𝐝 𝐨𝐮𝐭 𝐰𝐢𝐭𝐡 𝐛𝐨𝐥𝐝, 𝐢𝐭𝐚𝐥𝐢𝐜, 𝐚𝐧𝐝 𝐦𝐨𝐫𝐞!
+
+If you’ve ever wished for 𝐛𝐨𝐥𝐝, 𝑖𝑡𝑎𝑙𝑖𝑐, or u̲n̲d̲e̲r̲l̲i̲n̲e̲ in your LinkedIn posts, I’ve got great news!
+
+𝐋𝐢𝐧𝐤𝐞𝐝𝐈𝐧 𝐓𝐞𝐱𝐭 𝐅𝐨𝐫𝐦𝐚𝐭𝐭𝐞𝐫, a Chrome extension that helps you:
+✅ Format your LinkedIn posts in seconds
+✅ Add emphasis with styled text & emojis 😃
+✅ Improve engagement effortlessly
+
+Would love your feedback! How do you currently format your LinkedIn posts? Let me know in the comments. 💬
+`;
+
 window.addEventListener("load", () => {
   const editor = document.getElementById("editor");
   const emojiPicker = document.getElementById("emoji-picker");
   const previewContent = document.getElementById("preview-content");
-
+  
 
   // Function to save text to localStorage
   function saveToLocalStorage() {
@@ -13,7 +25,7 @@ window.addEventListener("load", () => {
   function updatePreview() {
     // Mount the React preview component
     if (previewContent) {
-      previewContent.textContent = editor.value || "Start writing and your post will appear here..";
+      previewContent.textContent = editor.value || samplePost;
     }
     saveToLocalStorage();
   }
@@ -23,7 +35,9 @@ window.addEventListener("load", () => {
     const savedText = localStorage.getItem("editorContent");
     if (savedText) {
       editor.value = JSON.parse(savedText).value;
-      previewContent.textContent = editor.value || "Start writing and your post will appear here..";
+      previewContent.textContent = editor.value;
+    } else {
+      previewContent.textContent = samplePost;
     }
   }
 
@@ -331,6 +345,7 @@ window.addEventListener("load", () => {
     "🛕",
     "🕌",
     "🕍",
+    "🌟",
   ];
 
   function initEmojiPicker() {
@@ -366,6 +381,7 @@ window.addEventListener("load", () => {
     if (confirm("Are you sure you want to clear all content?")) {
       localStorage.clear();
       editor.value = ""; // Clear the text editor
+      previewContent.textContent = samplePost;
     }
   }
 

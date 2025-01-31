@@ -27,6 +27,7 @@ body {
   background-color: var(--background-light);
   color: var(--text-primary);
   line-height: 1.6;
+  font-size: unset;
 }
 
 .container {
@@ -196,17 +197,21 @@ textarea {
   top: 24px;
 }
 
+/* Add this to ensure preview height is consistent */
 .linkedin-post-preview {
   background: white;
   border-radius: var(--radius-medium);
   box-shadow: var(--shadow-subtle);
   padding: 16px;
+  height: fit-content; /* Ensures container fits content */
 }
 
 .post-header {
   display: flex;
   gap: 12px;
   margin-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
 }
 
 .profile-pic {
@@ -245,14 +250,36 @@ textarea {
 .profile-title {
   color: var(--text-secondary);
   font-size: 14px;
-  margin-top: 2px;
 }
 
+/* Update the post-content class in your main.css */
 .post-content {
   color: var(--text-primary);
   margin: 12px 0;
   white-space: pre-wrap;
   word-wrap: break-word;
+  height: 400px; /* Fixed height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 8px; /* Space for scrollbar */
+}
+
+/* Add custom scrollbar styling */
+.post-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.post-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.post-content::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.post-content::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
 }
 
 /* .post-details {
