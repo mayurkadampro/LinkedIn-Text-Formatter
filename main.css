@@ -148,7 +148,7 @@ body {
   display: none;
   position: fixed;
   top: 50%;
-  left: 50%;
+  left: 27%;
   transform: translate(-50%, -50%);
   grid-template-columns: repeat(8, 1fr);
   gap: 8px;
@@ -188,13 +188,12 @@ textarea {
 
 .editor-section {
   flex: 1;
-  min-width: 500px;
+  width: 500px;
 }
 
 .preview-section {
   flex: 1;
-  position: sticky;
-  top: 24px;
+  width: 500px;
 }
 
 /* Add this to ensure preview height is consistent */
@@ -203,7 +202,8 @@ textarea {
   border-radius: var(--radius-medium);
   box-shadow: var(--shadow-subtle);
   padding: 16px;
-  height: fit-content; /* Ensures container fits content */
+  height: fit-content;
+  /* Ensures container fits content */
 }
 
 .post-header {
@@ -258,9 +258,12 @@ textarea {
   margin: 12px 0;
   white-space: pre-wrap;
   word-wrap: break-word;
-  height: 400px; /* Fixed height */
-  overflow-y: auto; /* Enable vertical scrolling */
-  padding-right: 8px; /* Space for scrollbar */
+  min-height: 400px;
+  height: 400px;
+  overflow-y: auto;
+  /* Enable vertical scrolling */
+  padding-right: 8px;
+  /* Space for scrollbar */
 }
 
 /* Add custom scrollbar styling */

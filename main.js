@@ -14,7 +14,7 @@ window.addEventListener("load", () => {
   const editor = document.getElementById("editor");
   const emojiPicker = document.getElementById("emoji-picker");
   const previewContent = document.getElementById("preview-content");
-  
+
 
   // Function to save text to localStorage
   function saveToLocalStorage() {
@@ -128,33 +128,50 @@ window.addEventListener("load", () => {
   function applyFormatting(text, type) {
     switch (type) {
       case "bold":
-        return text.replace(/[A-Za-z]/g, (char) => {
-          const baseCode = char >= "A" && char <= "Z" ? 0x1d400 : 0x1d41a;
-          const offset = char.toUpperCase().charCodeAt(0) - 65;
-          return String.fromCodePoint(baseCode + offset);
+        return text.replace(/[A-Za-z0-9]/g, (char) => {
+          if (/[A-Za-z]/.test(char)) {
+            const baseCode = char >= "A" && char <= "Z" ? 0x1d400 : 0x1d41a;
+            const offset = char.toUpperCase().charCodeAt(0) - 65;
+            return String.fromCodePoint(baseCode + offset);
+          } else {
+            return String.fromCodePoint(0x1d7ce + (char.charCodeAt(0) - 48)); // Bold numbers
+          }
         });
+
       case "italic":
-        return text.replace(/[A-Za-z]/g, (char) => {
-          const baseCode = char >= "A" && char <= "Z" ? 0x1d434 : 0x1d44e;
-          const offset = char.toUpperCase().charCodeAt(0) - 65;
-          return String.fromCodePoint(baseCode + offset);
+        return text.replace(/[A-Za-z0-9]/g, (char) => {
+          if (/[A-Za-z]/.test(char)) {
+            const baseCode = char >= "A" && char <= "Z" ? 0x1d434 : 0x1d44e;
+            const offset = char.toUpperCase().charCodeAt(0) - 65;
+            return String.fromCodePoint(baseCode + offset);
+          } else {
+            return char; // Italic digits don't exist in Unicode
+          }
         });
+
       case "boldItalic":
-        return text.replace(/[A-Za-z]/g, (char) => {
-          const baseCode = char >= "A" && char <= "Z" ? 0x1d468 : 0x1d482;
-          const offset = char.toUpperCase().charCodeAt(0) - 65;
-          return String.fromCodePoint(baseCode + offset);
+        return text.replace(/[A-Za-z0-9]/g, (char) => {
+          if (/[A-Za-z]/.test(char)) {
+            const baseCode = char >= "A" && char <= "Z" ? 0x1d468 : 0x1d482;
+            const offset = char.toUpperCase().charCodeAt(0) - 65;
+            return String.fromCodePoint(baseCode + offset);
+          } else {
+            return char; // Bold Italic digits don't exist in Unicode
+          }
         });
+
       case "underline":
         return text
           .split("")
-          .map((char) => char + "\u0332")
+          .map((char) => char + "\u0332") // Add underline modifier
           .join("");
+
       case "strikethrough":
         return text
           .split("")
-          .map((char) => char + "\u0336")
+          .map((char) => char + "\u0336") // Add strikethrough modifier
           .join("");
+
       default:
         return text;
     }
