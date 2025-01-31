@@ -15,8 +15,8 @@
       "1024": "icons/icon-1024.png"
     },
     "default_popup_size": {
-      "width": 800,
-      "height": 580
+      "width": 600,
+      "height": 675
     }
   },
   "icons": {
