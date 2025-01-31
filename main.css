@@ -174,3 +174,133 @@ body {
 textarea {
   resize: none;
 }
+
+/* Add at the end of your existing CSS */
+
+.app-container {
+  display: flex;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.editor-section {
+  flex: 1;
+  min-width: 500px;
+}
+
+.preview-section {
+  flex: 1;
+  position: sticky;
+  top: 24px;
+}
+
+.linkedin-post-preview {
+  background: white;
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-subtle);
+  padding: 16px;
+}
+
+.post-header {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.profile-pic {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.profile-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.post-time {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.profile-title {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+.post-content {
+  color: var(--text-primary);
+  margin: 12px 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* .post-details {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 12px;
+} */
+
+.hashtag {
+  color: var(--linkedin-blue);
+}
+
+.post-footer {
+  border-top: 1px solid var(--border-color);
+  padding-top: 12px;
+}
+
+.engagement-stats {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.reactions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.reaction {
+  font-size: 12px;
+}
+
+.post-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.post-action:hover {
+  background-color: var(--background-light);
+}

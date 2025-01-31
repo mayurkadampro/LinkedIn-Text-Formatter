@@ -1,6 +1,8 @@
 window.addEventListener("load", () => {
   const editor = document.getElementById("editor");
   const emojiPicker = document.getElementById("emoji-picker");
+  const previewContent = document.getElementById("preview-content");
+
 
   // Function to save text to localStorage
   function saveToLocalStorage() {
@@ -8,11 +10,20 @@ window.addEventListener("load", () => {
     localStorage.setItem("editorContent", JSON.stringify(content));
   }
 
+  function updatePreview() {
+    // Mount the React preview component
+    if (previewContent) {
+      previewContent.textContent = editor.value || "Start writing and your post will appear here..";
+    }
+    saveToLocalStorage();
+  }
+
   // Function to load saved text from localStorage
   function loadFromLocalStorage() {
     const savedText = localStorage.getItem("editorContent");
     if (savedText) {
       editor.value = JSON.parse(savedText).value;
+      previewContent.textContent = editor.value || "Start writing and your post will appear here..";
     }
   }
 
@@ -97,7 +108,7 @@ window.addEventListener("load", () => {
     // Restore scroll position
     editor.scrollTop = scrollPosition;
 
-    saveToLocalStorage();
+    updatePreview();
   }
 
   function applyFormatting(text, type) {
@@ -137,19 +148,189 @@ window.addEventListener("load", () => {
 
   // Emoji functions
   const emojis = [
-    '😀', '😃', '😄', '😁', '😅', '😂', '🤣', '😊', '😇', '🙂', '🙃', '😉', '😌', '😍',
-    '🥰', '😘', '😗', '😙', '😚', '😋', '😛', '😝', '😜', '🤪', '🤨', '🧐', '🤓', '😎',
-    '🤔', '🤗', '🥺', '😢', '😭', '🤩', '🥳', '😡', '😠', '🤬', '😷', '🤒', '🤕', '🤧',
-    '🥶', '😳', '👍', '👎', '👏', '🙌', '🤝', '👊', '✊', '🤛', '🤜', '🤞', '✌️', '🤟', '🤘',
-    '👌', '🙏', '🖖', '🤲', '✋', '🤚', '👋', '🖐', '❤️', '🧡', '💛', '💚', '💙', '💜', '🖤',
-    '💔', '❣️', '💕', '💞', '💓', '💗', '💖', '🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼',
-    '🐨', '🐯', '🦁', '🦄', '🐸', '🦋', '🌸', '🌺', '🌻', '🌼', '🌵', '🍁', '🍄',
-    '🍎', '🍊', '🍇', '🍉', '🍌', '🍍', '🥭', '🍓', '🥥', '🍔', '🍟', '🌭', '🍿',
-    '🍩', '🍪', '🧁', '🎂', '🍫', '🍯', '🥗', '🥩', '💡', '🔑',
-    '⚽', '🏀', '🏈', '⚾', '🎾', '🏐', '🏓', '🏸', '🎱', '🪁', '🛹', '⛳', '🥋', '🏋️‍♀️',
-    '💻', '🖥', '📱', '📞', '⌚', '🪑', '🖍', '✏️', '📂', '🗂', '📜', '📰', '📇', '🎁',
-    '♻️', '☮️', '☯️', '⚛️', '💢', '💬', '💭', '🃏', '🀄', '💹', '🆙', '🔝', '❓', '❗',
-    '🌌', '🌅', '🌄', '🌃', '🌇', '🛣', '🏙', '🏞', '🗻', '🌋', '🏔', '🗾', '🏖', '🏝', '🛤', '🛕', '🕌', '🕍'
+    "😀",
+    "😃",
+    "😄",
+    "😁",
+    "😅",
+    "😂",
+    "🤣",
+    "😊",
+    "😇",
+    "🙂",
+    "🙃",
+    "😉",
+    "😌",
+    "😍",
+    "🥰",
+    "😘",
+    "😗",
+    "😙",
+    "😚",
+    "😋",
+    "😛",
+    "😝",
+    "😜",
+    "🤪",
+    "🤨",
+    "🧐",
+    "🤓",
+    "😎",
+    "🤔",
+    "🤗",
+    "🥺",
+    "😢",
+    "😭",
+    "🤩",
+    "🥳",
+    "😡",
+    "😠",
+    "🤬",
+    "😷",
+    "🤒",
+    "🤕",
+    "🤧",
+    "🥶",
+    "😳",
+    "👍",
+    "👎",
+    "👏",
+    "🙌",
+    "🤝",
+    "👊",
+    "✊",
+    "🤛",
+    "🤜",
+    "🤞",
+    "✌️",
+    "🤟",
+    "🤘",
+    "👌",
+    "🙏",
+    "🖖",
+    "🤲",
+    "✋",
+    "🤚",
+    "👋",
+    "🖐",
+    "❤️",
+    "🧡",
+    "💛",
+    "💚",
+    "💙",
+    "💜",
+    "🖤",
+    "💔",
+    "❣️",
+    "💕",
+    "💞",
+    "💓",
+    "💗",
+    "💖",
+    "🐶",
+    "🐱",
+    "🐭",
+    "🐹",
+    "🐰",
+    "🦊",
+    "🐻",
+    "🐼",
+    "🐨",
+    "🐯",
+    "🦁",
+    "🦄",
+    "🐸",
+    "🦋",
+    "🌸",
+    "🌺",
+    "🌻",
+    "🌼",
+    "🌵",
+    "🍁",
+    "🍄",
+    "🍎",
+    "🍊",
+    "🍇",
+    "🍉",
+    "🍌",
+    "🍍",
+    "🥭",
+    "🍓",
+    "🥥",
+    "🍔",
+    "🍟",
+    "🌭",
+    "🍿",
+    "🍩",
+    "🍪",
+    "🧁",
+    "🎂",
+    "🍫",
+    "🍯",
+    "🥗",
+    "🥩",
+    "💡",
+    "🔑",
+    "⚽",
+    "🏀",
+    "🏈",
+    "⚾",
+    "🎾",
+    "🏐",
+    "🏓",
+    "🏸",
+    "🎱",
+    "🪁",
+    "🛹",
+    "⛳",
+    "🥋",
+    "🏋️‍♀️",
+    "💻",
+    "🖥",
+    "📱",
+    "📞",
+    "⌚",
+    "🪑",
+    "🖍",
+    "✏️",
+    "📂",
+    "🗂",
+    "📜",
+    "📰",
+    "📇",
+    "🎁",
+    "♻️",
+    "☮️",
+    "☯️",
+    "⚛️",
+    "💢",
+    "💬",
+    "💭",
+    "🃏",
+    "🀄",
+    "💹",
+    "🆙",
+    "🔝",
+    "❓",
+    "❗",
+    "🌌",
+    "🌅",
+    "🌄",
+    "🌃",
+    "🌇",
+    "🛣",
+    "🏙",
+    "🏞",
+    "🗻",
+    "🌋",
+    "🏔",
+    "🗾",
+    "🏖",
+    "🏝",
+    "🛤",
+    "🛕",
+    "🕌",
+    "🕍",
   ];
 
   function initEmojiPicker() {
@@ -177,7 +358,7 @@ window.addEventListener("load", () => {
       editor.selectionStart = editor.selectionEnd = start + emoji.length;
 
       toggleEmojiPicker();
-      saveToLocalStorage();
+      updatePreview();
     }
   }
 
@@ -218,7 +399,7 @@ window.addEventListener("load", () => {
     // Restore the selection range
     editor.selectionStart = start;
     editor.selectionEnd = start + updatedText.length;
-    saveToLocalStorage();
+    updatePreview();
   }
 
   function insertOrderedList() {
@@ -308,5 +489,5 @@ window.addEventListener("load", () => {
   loadFromLocalStorage();
 
   // Listen for text changes and save to localStorage
-  editor.addEventListener("input", saveToLocalStorage);
+  editor.addEventListener("input", updatePreview);
 });

@@ -6,8 +6,8 @@ chrome.action.onClicked.addListener(() => {
         const screenHeight = primaryDisplay.workArea.height;
 
         // Set popup window dimensions with minimum and maximum constraints
-        const popupWidth = Math.min(580, screenWidth * 0.8); // 80% of screen width up to 500px
-        let popupHeight = 675; // Your optimal height
+        const popupWidth = Math.min(1080, screenWidth * 0.8); // 80% of screen width up to 500px
+        let popupHeight = 670; // Your optimal height
 
         // Adjust height if screen is too small
         if (screenHeight < 800) {
