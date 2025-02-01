@@ -72,6 +72,9 @@ window.addEventListener("load", () => {
 
     if (!selectedText) return;
 
+    // Save current scroll position
+    const scrollPosition = editor.scrollTop;
+
     // Check if current style matches clicked button style
     const isMatchingStyle = checkMatchingStyle(selectedText, type);
 
@@ -90,6 +93,10 @@ window.addEventListener("load", () => {
     editor.focus();
     editor.selectionStart = start;
     editor.selectionEnd = start + resultText.length;
+
+    // Restore scroll position
+    editor.scrollTop = scrollPosition;
+
     saveToLocalStorage();
   }
 
