@@ -176,6 +176,10 @@ textarea {
   resize: none;
 }
 
+a {
+  text-decoration: none !important;
+}
+
 /* Add at the end of your existing CSS */
 
 .app-container {
@@ -234,6 +238,7 @@ textarea {
 .profile-meta {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 4px;
 }
 
@@ -247,8 +252,15 @@ textarea {
 }
 
 .post-time {
+  font-weight: normal;
   color: var(--text-secondary);
   font-size: 14px;
+}
+
+.post-connect {
+  color: var(--linkedin-blue);
+  font-size: 14px;
+  cursor:pointer
 }
 
 .profile-title {

@@ -505,6 +505,8 @@ window.addEventListener("load", () => {
       insertEmoji(event);
     } else if (event.target.matches("#btn-copy")) {
       copyText();
+    } else if(event.target.matches("#btn-post-connect")){
+      window.open('https://www.linkedin.com/in/mayurkadampro/', '_blank');
     } else {
       // Close emoji picker when clicking outside
       if (
