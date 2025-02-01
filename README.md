@@ -1,6 +1,8 @@
 # 🚀 LinkedIn Text Formatter  
 
-Tired of plain text on LinkedIn? Now, make your posts stand out with **bold**, *italic*, <u>underline</u>, emojis 😃, and more!  
+Tired of plain text on LinkedIn? Now, make your posts stand out with **bold**, *italic*, <u>underline</u>, emojis 😃, and more!
+
+![First](https://github.com/mayurkadampro/LinkedIn-Text-Formatter/blob/master/screenshot/extension-view.png)
 
 ## ✨ About  
 **LinkedIn Text Formatter** is a simple yet powerful tool that helps you style your LinkedIn posts effortlessly. Since LinkedIn doesn’t support native text formatting - no HTML tags, no ASCII tricks - this tool leverages **Unicode characters** to bring rich text styling to your posts.  
