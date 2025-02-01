@@ -1,57 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinkedIn Text Formatter</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LinkedIn Text Formatter</title>
-  <link rel="stylesheet" href="main.css">
-</head>
+  <body>
+    <div class="app-container">
+      <!-- Editor Section -->
+      <div class="editor-section">
+        <div class="container">
+          <div class="header">
+            <h1 class="title">
+              <img src="icons/linkedin-icon.png" alt="LinkedIn" />
+              LinkedIn Text Formatter
+            </h1>
+          </div>
+          <div class="subtitle">
+            <p>
+              Elevate your content with precision – Unicode Formatter makes
+              styling effortless!
+            </p>
+          </div>
 
-<body>
-  <div class="container">
-    <div class="header">
-      <h1 class="title">
-        <img src="icons/linkedin-icon.png" alt="LinkedIn">
-        LinkedIn Text Formatter
-      </h1>
+          <div class="toolbar">
+            <div class="btn-group">
+              <button class="btn" id="btn-bold" title="Bold">𝐁</button>
+              <button class="btn" id="btn-italic" title="Italic">𝐼</button>
+              <button class="btn" id="btn-bold-italic" title="Bold and Italic">
+                𝐁 + 𝐼
+              </button>
+              <button class="btn" id="btn-underline" title="Underline">
+                U̲
+              </button>
+            </div>
+            <div class="divider"></div>
 
-    </div>
-    <div class="subtitle">
-      <p>Start transforming your writing today - explore effortless formatting for every piece you
-        create!</p>
+            <div class="btn-group">
+              <button class="btn" id="btn-bullet-point" title="Bullet Point">
+                •
+              </button>
+            </div>
+            <div class="divider"></div>
 
-    </div>
+            <div class="btn-group">
+              <button class="btn" id="btn-add-emoji" title="Add Emoji">
+                😊
+              </button>
+              <button class="btn" id="btn-clear" title="Clear">🧹</button>
+            </div>
+          </div>
 
-    <div class="toolbar">
-      <div class="btn-group">
-        <button class="btn" id="btn-bold" title="Bold">𝐁</button>
-        <button class="btn" id="btn-italic" title="Italic">𝐼</button>
-        <button class="btn" id="btn-bold-italic" title="Bold and Italic">𝐁 + 𝐼</button>
-        <button class="btn" id="btn-underline" title="Underline">U̲</button>
+          <textarea
+            id="editor"
+            class="editor"
+            placeholder="Compose your LinkedIn post here..."
+          ></textarea>
+
+          <button class="action-btn" id="btn-copy">Copy Formatted Text</button>
+        </div>
       </div>
-      <div class="divider"></div>
 
-      <div class="btn-group">
-        <button class="btn" id="btn-bullet-point" title="Bullet Point">•</button>
-        <!-- <button class="btn" id="btn-ordered-list" title="Ordered List">①</button> -->
-      </div>
-      <div class="divider"></div>
-
-      <div class="btn-group">
-        <button class="btn" id="btn-add-emoji" title="Add Emoji">😊</button>
-        <button class="btn" id="btn-clear" title="Clear">🧹</button>
+      <!-- Preview Section -->
+      <div class="preview-section">
+        <div class="linkedin-post-preview">
+          <div class="post-header">
+            <div class="profile-pic">
+              <img src="icons/profile-icon.jpg" alt="Profile Picture" />
+            </div>
+            <div class="profile-info">
+              <div class="profile-meta">
+                <span class="profile-name"
+                  >Mayur Kadam <span class="post-time">• 12h</span></span
+                >
+                <span class="post-connect" id="btn-post-connect">+ Connect</span>
+              </div>
+              <div class="profile-title">
+                SDE @EPAM | Ex-TCS | Tech Blogger @Medium | YouTuber |
+                JavaScript, React.js, React Native | DSA | System Design...
+              </div>
+            </div>
+          </div>
+          <div class="post-content" id="preview-content">
+            Start writing and your post will appear here..
+          </div>
+          <!-- <div class="post-details">
+            You can add images, links,
+            <span class="hashtag">#hashtags</span> and emojis 😊
+          </div> -->
+          <div class="post-footer">
+            <div class="engagement-stats">
+              <div class="reactions">
+                <span class="reaction">👍</span>
+                <span class="reaction">❤️</span>
+                <span>57</span>
+              </div>
+              <div class="comments-reposts">
+                <span>24 comments</span>
+                <span>• 6 reposts</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <textarea id="editor" class="editor" placeholder="Compose your LinkedIn post here..."></textarea>
+    <div id="emoji-picker" class="emoji-picker"></div>
 
-    <button class="action-btn" id="btn-copy">Copy Formatted Text</button>
-  </div>
-
-  <div id="emoji-picker" class="emoji-picker"></div>
-
-  <script src="main.js"></script>
-</body>
-
+    <script src="main.js"></script>
+  </body>
 </html>
