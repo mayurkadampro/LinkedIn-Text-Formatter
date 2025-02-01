@@ -1,6 +1,20 @@
+const samplePost = `🚀 𝐓𝐢𝐫𝐞𝐝 𝐨𝐟 𝐩𝐥𝐚𝐢𝐧 𝐋𝐢𝐧𝐤𝐞𝐝𝐈𝐧 𝐩𝐨𝐬𝐭𝐬? 𝐒𝐭𝐚𝐧𝐝 𝐨𝐮𝐭 𝐰𝐢𝐭𝐡 𝐛𝐨𝐥𝐝, 𝐢𝐭𝐚𝐥𝐢𝐜, 𝐚𝐧𝐝 𝐦𝐨𝐫𝐞!
+
+If you’ve ever wished for 𝐛𝐨𝐥𝐝, 𝑖𝑡𝑎𝑙𝑖𝑐, or u̲n̲d̲e̲r̲l̲i̲n̲e̲ in your LinkedIn posts, I’ve got great news!
+
+𝐋𝐢𝐧𝐤𝐞𝐝𝐈𝐧 𝐓𝐞𝐱𝐭 𝐅𝐨𝐫𝐦𝐚𝐭𝐭𝐞𝐫, a Chrome extension that helps you:
+✅ Format your LinkedIn posts in seconds
+✅ Add emphasis with styled text & emojis 😃
+✅ Improve engagement effortlessly
+
+Would love your feedback! How do you currently format your LinkedIn posts? Let me know in the comments. 💬
+`;
+
 window.addEventListener("load", () => {
   const editor = document.getElementById("editor");
   const emojiPicker = document.getElementById("emoji-picker");
+  const previewContent = document.getElementById("preview-content");
+
 
   // Function to save text to localStorage
   function saveToLocalStorage() {
@@ -8,11 +22,22 @@ window.addEventListener("load", () => {
     localStorage.setItem("editorContent", JSON.stringify(content));
   }
 
+  function updatePreview() {
+    // Mount the React preview component
+    if (previewContent) {
+      previewContent.textContent = editor.value || samplePost;
+    }
+    saveToLocalStorage();
+  }
+
   // Function to load saved text from localStorage
   function loadFromLocalStorage() {
     const savedText = localStorage.getItem("editorContent");
     if (savedText) {
       editor.value = JSON.parse(savedText).value;
+      previewContent.textContent = editor.value;
+    } else {
+      previewContent.textContent = samplePost;
     }
   }
 
@@ -42,6 +67,7 @@ window.addEventListener("load", () => {
         }
         return match;
       })
+      .replace(/ℎ/g, "h") // Fix for italic "h"
       .replace(/[\u0332\u0336]/g, ""); // Remove underline and strikethrough
   }
 
@@ -72,6 +98,9 @@ window.addEventListener("load", () => {
 
     if (!selectedText) return;
 
+    // Save current scroll position
+    const scrollPosition = editor.scrollTop;
+
     // Check if current style matches clicked button style
     const isMatchingStyle = checkMatchingStyle(selectedText, type);
 
@@ -90,39 +119,61 @@ window.addEventListener("load", () => {
     editor.focus();
     editor.selectionStart = start;
     editor.selectionEnd = start + resultText.length;
-    saveToLocalStorage();
+
+    // Restore scroll position
+    editor.scrollTop = scrollPosition;
+
+    updatePreview();
   }
 
   function applyFormatting(text, type) {
     switch (type) {
       case "bold":
-        return text.replace(/[A-Za-z]/g, (char) => {
-          const baseCode = char >= "A" && char <= "Z" ? 0x1d400 : 0x1d41a;
-          const offset = char.toUpperCase().charCodeAt(0) - 65;
-          return String.fromCodePoint(baseCode + offset);
+        return text.replace(/[A-Za-z0-9]/g, (char) => {
+          if (/[A-Za-z]/.test(char)) {
+            const baseCode = char >= "A" && char <= "Z" ? 0x1d400 : 0x1d41a;
+            const offset = char.toUpperCase().charCodeAt(0) - 65;
+            return String.fromCodePoint(baseCode + offset);
+          } else {
+            return String.fromCodePoint(0x1d7ce + (char.charCodeAt(0) - 48)); // Bold numbers
+          }
         });
+
       case "italic":
-        return text.replace(/[A-Za-z]/g, (char) => {
-          const baseCode = char >= "A" && char <= "Z" ? 0x1d434 : 0x1d44e;
-          const offset = char.toUpperCase().charCodeAt(0) - 65;
-          return String.fromCodePoint(baseCode + offset);
+        return text.replace(/[A-Za-z0-9]/g, (char) => {
+          if (char === "h") return "ℎ"; // Fix for italic 'h'
+          if (/[A-Za-z]/.test(char)) {
+            const baseCode = char >= "A" && char <= "Z" ? 0x1d434 : 0x1d44e;
+            const offset = char.toUpperCase().charCodeAt(0) - 65;
+            return String.fromCodePoint(baseCode + offset);
+          } else {
+            return char; // Italic digits don't exist in Unicode
+          }
         });
+
       case "boldItalic":
-        return text.replace(/[A-Za-z]/g, (char) => {
-          const baseCode = char >= "A" && char <= "Z" ? 0x1d468 : 0x1d482;
-          const offset = char.toUpperCase().charCodeAt(0) - 65;
-          return String.fromCodePoint(baseCode + offset);
+        return text.replace(/[A-Za-z0-9]/g, (char) => {
+          if (/[A-Za-z]/.test(char)) {
+            const baseCode = char >= "A" && char <= "Z" ? 0x1d468 : 0x1d482;
+            const offset = char.toUpperCase().charCodeAt(0) - 65;
+            return String.fromCodePoint(baseCode + offset);
+          } else {
+            return char; // Bold Italic digits don't exist in Unicode
+          }
         });
+
       case "underline":
         return text
           .split("")
-          .map((char) => char + "\u0332")
+          .map((char) => char + "\u0332") // Add underline modifier
           .join("");
+
       case "strikethrough":
         return text
           .split("")
-          .map((char) => char + "\u0336")
+          .map((char) => char + "\u0336") // Add strikethrough modifier
           .join("");
+
       default:
         return text;
     }
@@ -130,19 +181,191 @@ window.addEventListener("load", () => {
 
   // Emoji functions
   const emojis = [
-    '😀', '😃', '😄', '😁', '😅', '😂', '🤣', '😊', '😇', '🙂', '🙃', '😉', '😌', '😍',
-    '🥰', '😘', '😗', '😙', '😚', '😋', '😛', '😝', '😜', '🤪', '🤨', '🧐', '🤓', '😎',
-    '🤔', '🤗', '🥺', '😢', '😭', '🤩', '🥳', '😡', '😠', '🤬', '😷', '🤒', '🤕', '🤧',
-    '🥶', '😳', '👍', '👎', '👏', '🙌', '🤝', '👊', '✊', '🤛', '🤜', '🤞', '✌️', '🤟', '🤘',
-    '👌', '🙏', '🖖', '🤲', '✋', '🤚', '👋', '🖐', '❤️', '🧡', '💛', '💚', '💙', '💜', '🖤',
-    '💔', '❣️', '💕', '💞', '💓', '💗', '💖', '🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼',
-    '🐨', '🐯', '🦁', '🦄', '🐸', '🦋', '🌸', '🌺', '🌻', '🌼', '🌵', '🍁', '🍄',
-    '🍎', '🍊', '🍇', '🍉', '🍌', '🍍', '🥭', '🍓', '🥥', '🍔', '🍟', '🌭', '🍿',
-    '🍩', '🍪', '🧁', '🎂', '🍫', '🍯', '🥗', '🥩', '💡', '🔑',
-    '⚽', '🏀', '🏈', '⚾', '🎾', '🏐', '🏓', '🏸', '🎱', '🪁', '🛹', '⛳', '🥋', '🏋️‍♀️',
-    '💻', '🖥', '📱', '📞', '⌚', '🪑', '🖍', '✏️', '📂', '🗂', '📜', '📰', '📇', '🎁',
-    '♻️', '☮️', '☯️', '⚛️', '💢', '💬', '💭', '🃏', '🀄', '💹', '🆙', '🔝', '❓', '❗',
-    '🌌', '🌅', '🌄', '🌃', '🌇', '🛣', '🏙', '🏞', '🗻', '🌋', '🏔', '🗾', '🏖', '🏝', '🛤', '🛕', '🕌', '🕍'
+    "😀",
+    "😃",
+    "😄",
+    "😁",
+    "😅",
+    "😂",
+    "🤣",
+    "😊",
+    "😇",
+    "🙂",
+    "🙃",
+    "😉",
+    "😌",
+    "😍",
+    "🥰",
+    "😘",
+    "😗",
+    "😙",
+    "😚",
+    "😋",
+    "😛",
+    "😝",
+    "😜",
+    "🤪",
+    "🤨",
+    "🧐",
+    "🤓",
+    "😎",
+    "🤔",
+    "🤗",
+    "🥺",
+    "😢",
+    "😭",
+    "🤩",
+    "🥳",
+    "😡",
+    "😠",
+    "🤬",
+    "😷",
+    "🤒",
+    "🤕",
+    "🤧",
+    "🥶",
+    "😳",
+    "👍",
+    "👎",
+    "👏",
+    "🙌",
+    "🤝",
+    "👊",
+    "✊",
+    "🤛",
+    "🤜",
+    "🤞",
+    "✌️",
+    "🤟",
+    "🤘",
+    "👌",
+    "🙏",
+    "🖖",
+    "🤲",
+    "✋",
+    "🤚",
+    "👋",
+    "🖐",
+    "❤️",
+    "🧡",
+    "💛",
+    "💚",
+    "💙",
+    "💜",
+    "🖤",
+    "💔",
+    "❣️",
+    "💕",
+    "💞",
+    "💓",
+    "💗",
+    "💖",
+    "🐶",
+    "🐱",
+    "🐭",
+    "🐹",
+    "🐰",
+    "🦊",
+    "🐻",
+    "🐼",
+    "🐨",
+    "🐯",
+    "🦁",
+    "🦄",
+    "🐸",
+    "🦋",
+    "🌸",
+    "🌺",
+    "🌻",
+    "🌼",
+    "🌵",
+    "🍁",
+    "🍄",
+    "🍎",
+    "🍊",
+    "🍇",
+    "🍉",
+    "🍌",
+    "🍍",
+    "🥭",
+    "🍓",
+    "🥥",
+    "🍔",
+    "🍟",
+    "🌭",
+    "🍿",
+    "🍩",
+    "🍪",
+    "🧁",
+    "🎂",
+    "🍫",
+    "🍯",
+    "🥗",
+    "🥩",
+    "💡",
+    "🔑",
+    "⚽",
+    "🏀",
+    "🏈",
+    "⚾",
+    "🎾",
+    "🏐",
+    "🏓",
+    "🏸",
+    "🎱",
+    "🪁",
+    "🛹",
+    "⛳",
+    "🥋",
+    "🏋️‍♀️",
+    "💻",
+    "🖥",
+    "📱",
+    "📞",
+    "⌚",
+    "🪑",
+    "🖍",
+    "✏️",
+    "📂",
+    "🗂",
+    "📜",
+    "📰",
+    "📇",
+    "🎁",
+    "♻️",
+    "☮️",
+    "☯️",
+    "⚛️",
+    "💢",
+    "💬",
+    "💭",
+    "🃏",
+    "🀄",
+    "💹",
+    "🆙",
+    "🔝",
+    "❓",
+    "❗",
+    "🌌",
+    "🌅",
+    "🌄",
+    "🌃",
+    "🌇",
+    "🛣",
+    "🏙",
+    "🏞",
+    "🗻",
+    "🌋",
+    "🏔",
+    "🗾",
+    "🏖",
+    "🏝",
+    "🛤",
+    "🛕",
+    "🕌",
+    "🕍",
+    "🌟",
+    "✅",
   ];
 
   function initEmojiPicker() {
@@ -170,7 +393,7 @@ window.addEventListener("load", () => {
       editor.selectionStart = editor.selectionEnd = start + emoji.length;
 
       toggleEmojiPicker();
-      saveToLocalStorage();
+      updatePreview();
     }
   }
 
@@ -178,6 +401,7 @@ window.addEventListener("load", () => {
     if (confirm("Are you sure you want to clear all content?")) {
       localStorage.clear();
       editor.value = ""; // Clear the text editor
+      previewContent.textContent = samplePost;
     }
   }
 
@@ -211,7 +435,7 @@ window.addEventListener("load", () => {
     // Restore the selection range
     editor.selectionStart = start;
     editor.selectionEnd = start + updatedText.length;
-    saveToLocalStorage();
+    updatePreview();
   }
 
   function insertOrderedList() {
@@ -283,6 +507,8 @@ window.addEventListener("load", () => {
       insertEmoji(event);
     } else if (event.target.matches("#btn-copy")) {
       copyText();
+    } else if (event.target.matches("#btn-post-connect")) {
+      window.open('https://www.linkedin.com/in/mayurkadampro/', '_blank');
     } else {
       // Close emoji picker when clicking outside
       if (
@@ -301,5 +527,5 @@ window.addEventListener("load", () => {
   loadFromLocalStorage();
 
   // Listen for text changes and save to localStorage
-  editor.addEventListener("input", saveToLocalStorage);
+  editor.addEventListener("input", updatePreview);
 });
