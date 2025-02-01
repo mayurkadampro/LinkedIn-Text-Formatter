@@ -67,6 +67,7 @@ window.addEventListener("load", () => {
         }
         return match;
       })
+      .replace(/ℎ/g, "h") // Fix for italic "h"
       .replace(/[\u0332\u0336]/g, ""); // Remove underline and strikethrough
   }
 
@@ -140,6 +141,7 @@ window.addEventListener("load", () => {
 
       case "italic":
         return text.replace(/[A-Za-z0-9]/g, (char) => {
+          if (char === "h") return "ℎ"; // Fix for italic 'h'
           if (/[A-Za-z]/.test(char)) {
             const baseCode = char >= "A" && char <= "Z" ? 0x1d434 : 0x1d44e;
             const offset = char.toUpperCase().charCodeAt(0) - 65;
@@ -505,7 +507,7 @@ window.addEventListener("load", () => {
       insertEmoji(event);
     } else if (event.target.matches("#btn-copy")) {
       copyText();
-    } else if(event.target.matches("#btn-post-connect")){
+    } else if (event.target.matches("#btn-post-connect")) {
       window.open('https://www.linkedin.com/in/mayurkadampro/', '_blank');
     } else {
       // Close emoji picker when clicking outside
