@@ -12,7 +12,8 @@ LinkedIn restricts custom styling, making posts look monotonous. Inspired by pla
 
 ## 🌟 Features  
 - ✅ **Format text instantly** – bold, italic, underline, emojis  
-- ✅ **One-click copy** – easy pasting into LinkedIn posts  
+- ✅ **One-click copy** – easy pasting into LinkedIn posts
+- ✅ **Live Preview** of typed text
 - ✅ **No complex setup** – just type, format, copy, and post!  
 - ✅ **Completely free & open-source**  
 
